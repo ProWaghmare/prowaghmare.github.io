@@ -1,476 +1,553 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aneesh Waghmare</title>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 
-    <title>Freelancer - Yourname Theme</title>
+    <style>
+        :root{
+            --bg: #0b0f14;
+            --navy: #0f172a;
+            --card: #0f172a;
+            --card2: #111827;
+            --accent: #3b82f6;
+            --accent2: #22c55e;
+            --text: #e5e7eb;
+            --muted: #9ca3af;
+            --border: rgba(255,255,255,0.08);
+            --nav-h: 64px;
 
-    <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+            --max: 1040px;
+            --r: 18px;
+        }
 
-    <!-- Theme CSS -->
-    <link href="css/freelancer.min.css" rel="stylesheet">
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body{
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Inter", system-ui, -apple-system, Segoe UI, sans-serif;
+            line-height: 1.5;
+        }
 
-    <!-- Custom Fonts -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+        /* ---------- Layout helpers ---------- */
+        .container{
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 0 16px;
+        }
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        /* ---------- Nav ---------- */
+        nav{
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-h);
+            display: flex;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
 
+        .nav-inner{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            text-decoration: none;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        .dot{
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: var(--accent);
+            box-shadow: 0 0 0 6px rgba(59,130,246,0.15);
+            flex: 0 0 auto;
+        }
+
+        .nav-links{
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        nav a.link{
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            opacity: 0.85;
+            transition: opacity 0.2s ease, color 0.2s ease;
+        }
+        nav a.link:hover{
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        /* ---------- Hero ---------- */
+        header.title-slide{
+            min-height: 100vh;
+            padding-top: var(--nav-h);
+            display: flex;
+            align-items: center;
+            background:
+                    radial-gradient(900px circle at 20% 10%, rgba(59,130,246,0.18), transparent 60%),
+                    radial-gradient(700px circle at 80% 30%, rgba(34,197,94,0.10), transparent 60%),
+                    var(--navy);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero{
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 22px;
+            align-items: center;
+            padding: 32px 0;
+        }
+
+        h1{
+            font-family: "Montserrat", sans-serif;
+            font-weight: 900;
+            font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+            margin: 0;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+        }
+        h1 span{ color: var(--accent); }
+
+        .lead{
+            margin-top: 14px;
+            max-width: 620px;
+            font-size: 1.12rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .pill-row{
+            margin-top: 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pill{
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.04);
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: rgba(229,231,235,0.92);
+        }
+
+        .cta-row{
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.04);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 800;
+            transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+            user-select: none;
+            white-space: nowrap;
+        }
+        .btn:hover{
+            transform: translateY(-1px);
+            border-color: rgba(255,255,255,0.16);
+            background: rgba(255,255,255,0.06);
+        }
+        .btn.primary{
+            background: rgba(59,130,246,0.16);
+            border-color: rgba(59,130,246,0.35);
+        }
+        .btn.primary:hover{
+            background: rgba(59,130,246,0.22);
+            border-color: rgba(59,130,246,0.55);
+        }
+
+        .hero-card{
+            background: rgba(17,24,39,0.55);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 14px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+        }
+
+        .hero-img{
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.10);
+            display: block;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .hero-meta{
+            margin-top: 12px;
+            display: grid;
+            gap: 8px;
+            color: var(--muted);
+            font-size: 0.98rem;
+        }
+        .hero-meta strong{ color: var(--text); }
+
+        /* ---------- Sections ---------- */
+        section{
+            scroll-margin-top: calc(var(--nav-h) + 18px);
+            padding: 78px 0;
+        }
+
+        .section-title{
+            font-family: "Montserrat", sans-serif;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            margin: 0 0 14px;
+            font-size: 1.55rem;
+        }
+
+        .card{
+            background: rgba(17,24,39,0.62);
+            border-radius: var(--r);
+            padding: 34px;
+            border: 1px solid var(--border);
+            box-shadow: 0 18px 45px rgba(0,0,0,0.40);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .card:hover{
+            transform: translateY(-3px);
+            box-shadow: 0 26px 60px rgba(0,0,0,0.55);
+        }
+
+        .muted{
+            color: var(--muted);
+            line-height: 1.75;
+            font-size: 1.02rem;
+            margin: 0;
+        }
+
+        /* About layout */
+        .about-content{
+            display: grid;
+            grid-template-columns: 1fr 240px;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .about-img{
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.10);
+            background: rgba(255,255,255,0.03);
+        }
+
+        /* Skills / highlights */
+        .grid{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .mini{
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 14px;
+            min-height: 86px;
+        }
+        .mini h3{
+            margin: 0 0 6px;
+            font-size: 1.02rem;
+            letter-spacing: -0.01em;
+        }
+        .mini p{
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Achievements cards */
+        .awards{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 16px;
+        }
+        .award{
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.03);
+        }
+        .award img{
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            display: block;
+            background: rgba(255,255,255,0.03);
+        }
+        .award .body{
+            padding: 12px 12px 14px;
+        }
+        .award .title{
+            font-weight: 900;
+            margin: 0 0 6px;
+            letter-spacing: -0.01em;
+        }
+        .award .meta{
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+
+        /* Reveal animation */
+        .reveal{ opacity: 0; transform: translateY(26px); }
+        .reveal.visible{
+            opacity: 1;
+            transform: translateY(0);
+            transition:
+                    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        footer{
+            text-align: center;
+            padding: 46px 16px;
+            color: var(--muted);
+            font-size: 0.95rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 920px){
+            .hero{ grid-template-columns: 1fr; }
+            .about-content{ grid-template-columns: 1fr; }
+            .grid{ grid-template-columns: 1fr; }
+            .awards{ grid-template-columns: 1fr; }
+            nav{ height: auto; padding: 12px 0; }
+            :root{ --nav-h: 76px; }
+        }
+
+        @media (prefers-reduced-motion: reduce){
+            *{ transition: none !important; scroll-behavior: auto !important; }
+            .reveal{ opacity: 1; transform: none; }
+        }
+    </style>
 </head>
 
-<body id="page-top" class="index">
+<body>
 
-    <!-- Navigation -->
-    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="#page-top">Yourname</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#portfolio">Portfolio</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#about">About</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <img class="img-responsive" src="img/profile.png" alt="">
-                    <div class="intro-text">
-                        <span class="name">Hey there! I am Yourname!</span>
-                        <hr class="star-light">
-                        <span class="skills">Add your skills here. Eg: <br/> Web Developer - Graphic Artist</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Portfolio Grid Section -->
-    <section id="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Portfolio</h2>
-                    <hr class="star-primary">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/cabin.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal2" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/cake.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/circus.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/game.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal5" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/safe.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-                <div class="col-sm-4 portfolio-item">
-                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
-                        <div class="caption">
-                            <div class="caption-content">
-                                <i class="fa fa-search-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="img/portfolio/submarine.png" class="img-responsive" alt="">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="success" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>About</h2>
-                    <hr class="star-light">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-lg-offset-2">
-                    <p>Write a paragraph about who you are, where you're from, etc.</p>
-                </div>
-                <div class="col-lg-4">
-                    <p>Write a short paragraph about your hobbies and interests.</p>
-                </div>
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <!-- <a href="#" class="btn btn-lg btn-outline">
-                        <i class="fa fa-download"></i> Download Theme
-                    </a> -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-
-    <!-- Footer -->
-    <footer class="text-center">
-        <div class="footer-above">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-col col-md-4">
-                        <h3>Location</h3>
-                        <p>Your hostel address line 1
-                            <br>Your hostel address line 2</p>
-                    </div>
-                    <div class="footer-col col-md-4">
-                        <h3>Around the Web</h3>
-                        <ul class="list-inline">
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="footer-col col-md-4">
-                        <h3>Yourname</h3>
-                        <p><a href="http://startbootstrap.com">Yourname</a>.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-below">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        Copyright &copy; Your Website 2016
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
-        <a class="btn btn-primary" href="#page-top">
-            <i class="fa fa-chevron-up"></i>
+<nav>
+    <div class="container nav-inner">
+        <a class="brand" href="#home">
+            <span class="dot"></span>
+            Aneesh Waghmare
         </a>
-    </div>
 
-    <!-- Portfolio Modals -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/cabin.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Yourname</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="nav-links">
+            <a class="link" href="#about">About</a>
+            <a class="link" href="#experience">Experience</a>
+            <a class="link" href="#achievements">Achievements</a>
+            <a class="link" href="#contact">Contact</a>
         </div>
     </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/cake.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Yourname</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/circus.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Yourname</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/game.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Yourname</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/safe.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Yourname</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/submarine.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Yourname</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+</nav>
 
-    <!-- jQuery -->
-    <script src="vendor/jquery/jquery.min.js"></script>
+<header class="title-slide" id="home">
+    <div class="container hero">
+        <div>
+            <h1>Aneesh <span>Waghmare</span></h1>
+            <p class="lead">
+                I build clean, reliable websites and help student organizations communicate their mission clearly.
+            </p>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+            <div class="pill-row">
+                <div class="pill">Web Design</div>
+                <div class="pill">Service & Leadership</div>
+                <div class="pill">CAD / Engineering</div>
+            </div>
 
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+            <div class="cta-row">
+                <a class="btn primary" href="#contact">Contact Me</a>
+                <a class="btn" href="#experience">See Experience</a>
+                <!-- Replace these with your real links -->
+                <a class="btn" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+                <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+        </div>
 
-    <!-- Theme JavaScript -->
-    <script src="js/freelancer.min.js"></script>
+        <div class="hero-card reveal">
+            <img class="hero-img" src="Aneeshpicture.jpeg" alt="Photo of Aneesh" />
+            <div class="hero-meta">
+                <div><strong>Location:</strong> Chicago, IL</div>
+                <div><strong>Focus:</strong> Websites, service impact, engineering projects</div>
+                <div><strong>Currently:</strong> Life Scout • DTL • SEWA volunteer</div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section id="about">
+    <div class="container">
+        <div class="card reveal">
+            <h2 class="section-title">About Me</h2>
+
+            <div class="about-content">
+                <div>
+                    <p class="muted">
+                        I’m a high school student who loves building modern, accessible websites and working on
+                        design-focused engineering projects. I care about clarity, speed, and making sites that
+                        look professional on phones and laptops.
+                    </p>
+
+                    <div class="grid">
+                        <div class="mini">
+                            <h3>What I do</h3>
+                            <p>Websites for orgs, personal projects, and clean UI design.</p>
+                        </div>
+                        <div class="mini">
+                            <h3>How I work</h3>
+                            <p>Simple layouts, readable text, fast loading, mobile-first.</p>
+                        </div>
+                        <div class="mini">
+                            <h3>What I’m learning</h3>
+                            <p>Java, robotics basics, and better front-end design.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <img class="about-img" src="Aneeshpicture.jpeg" alt="Photo of Aneesh" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="experience">
+    <div class="container">
+        <div class="card reveal">
+            <h2 class="section-title">Experience & Involvement</h2>
+            <p class="muted">
+                I have over <strong>215 verified service hours</strong> through SEWA USA and completed the
+                <strong>DTL program</strong>. I enjoy CAD modeling and design-focused engineering work, and I’ve been active
+                in Scouting for over three years (currently a <strong>Life Scout</strong>).
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="achievements">
+    <div class="container">
+        <div class="card reveal">
+            <h2 class="section-title">Achievements</h2>
+            <p class="muted">
+                A few highlights from service, leadership, and competitions.
+            </p>
+
+            <div class="awards">
+                <div class="award">
+                    <img src="award1.jpg" alt="Award 1" onerror="this.style.display='none'" />
+                    <div class="body">
+                        <p class="title">SEWA Gold Milestones</p>
+                        <p class="meta">Service recognition for consistent volunteer impact.</p>
+                    </div>
+                </div>
+
+                <div class="award">
+                    <img src="award2.jpg" alt="Award 2" onerror="this.style.display='none'" />
+                    <div class="body">
+                        <p class="title">FBLA Parliamentary Procedures</p>
+                        <p class="meta">Team Secretary • communication and meeting leadership.</p>
+                    </div>
+                </div>
+
+                <div class="award">
+                    <img src="award3.jpg" alt="Award 3" onerror="this.style.display='none'" />
+                    <div class="body">
+                        <p class="title">Scouting Leadership</p>
+                        <p class="meta">Life Scout • service projects and team responsibility.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="container">
+        <div class="card reveal">
+            <h2 class="section-title">Contact</h2>
+            <p class="muted">
+                Want to collaborate or need a clean website for your org? Reach out.
+            </p>
+            <div class="cta-row">
+                <a class="btn primary" href="mailto:aneesh.waghmare@gmail.com">Gmail</a>
+                <a class="btn" href="https://www.instagram.com/aneeshw09?igsh=MTltMXVsM2w3bmVlbw%3D%3D&utm_source=qr" target="_blank" rel="noreferrer">Instagram</a>
+                <a class="btn" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © <span id="year"></span> Aneesh Waghmare
+</footer>
+
+<script>
+    // Footer year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Reveal on scroll (fast + simple)
+    const cards = document.querySelectorAll(".reveal");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!reducedMotion) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) entry.target.classList.add("visible");
+            });
+        }, { threshold: 0.15 });
+
+        cards.forEach((c) => io.observe(c));
+    } else {
+        cards.forEach((c) => c.classList.add("visible"));
+    }
+</script>
 
 </body>
-
 </html>
